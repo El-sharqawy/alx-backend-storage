@@ -4,8 +4,8 @@
 from pymongo import MongoClient
 
 
-if __name__ == "__main__":
-    """ Log Stats """
+def LogsStats():
+    """Log Stats"""
     client = MongoClient("mongodb://127.0.0.1:27017")
     nginxLogs = client.logs.nginx
 
@@ -19,3 +19,7 @@ if __name__ == "__main__":
 
     docsCount: int = nginxLogs.count_documents({"method": "GET", "path": "/status"})
     print(f"{docsCount} status check")
+
+
+if __name__ == "__main__":
+    LogsStats()
