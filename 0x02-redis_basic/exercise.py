@@ -20,3 +20,8 @@ class Cache:
         key = str(uuid.uuid4())
         self._redis.set(key, data)
         return key
+
+    @staticmethod
+    def get_str(value: bytes) -> str:
+        """takes byte and return str"""
+        return str(value)
