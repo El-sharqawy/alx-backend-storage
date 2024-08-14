@@ -30,3 +30,15 @@ class Cache:
     def get_int(value: bytes) -> int:
         """takes byte and returns str"""
         return int(value)
+
+    def get(self, key: str, fn: Optional[Any] = None) -> Any:
+        """Getter Function"""
+        value = self._redis.get(key)
+        if fn:
+            if fn == int:
+                return self.get_int(value)
+            elif fn == str:
+                return self.get_str(value)
+            else:
+                return fn(value)
+        return value
