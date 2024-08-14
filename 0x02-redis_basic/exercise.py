@@ -7,6 +7,18 @@ from functools import wraps
 import uuid
 
 
+def count_calls(method: Callable) -> Callable:
+    """counts the calls"""
+
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """wrap func"""
+        self._redis.incr(method.__qualname__)
+        return method(self, *args, **kwargs)
+
+    return wrapper
+
+
 class Cache:
     """Cache Class"""
 
@@ -15,6 +27,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """store def"""
         key = str(uuid.uuid4())
