@@ -23,5 +23,10 @@ class Cache:
 
     @staticmethod
     def get_str(value: bytes) -> str:
-        """takes byte and return str"""
+        """takes byte and returns str"""
         return str(value)
+
+    @staticmethod
+    def get_int(value: bytes) -> int:
+        """takes byte and returns str"""
+        return int(value)
